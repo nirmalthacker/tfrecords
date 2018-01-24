@@ -3,7 +3,7 @@
 Where I document any changes made to the library per my needs
 
 1. For Tensorflow's object detection API, that worked for me the tf.Example.Example proto buf had to be modified such that:
-  - key label was moved out of image/object/bbox/label to image/object/class/label
+  - key 'label' was moved out of image/object/bbox/label to image/object/class/label
   - key 'text' was out of image/object/bbox/text to image/object/class/text
 
 Example buffer:
