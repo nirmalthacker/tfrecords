@@ -1,3 +1,44 @@
+# Nirmal's temporory notes:
+
+Where I document any changes made to the library per my needs
+
+1. For Tensorflow's object detection API, that worked for me the tf.Example.Example proto buf had to be modified such that:
+- key label was moved out of image/object/bbox/label to image/object/class/label
+- key 'text' was out of image/object/bbox/text to image/object/class/text
+
+Example buffer:
+
+```python
+image_data = {
+  "filename" : "/path/to/image_1.jpg", 
+  "id" : "0",
+  "object" : {
+    "count" : 1,
+    "area" : [.49],
+    "id" : ["1"],
+    "bbox" : {
+      "xmin" : [0.1],
+      "xmax" : [0.8],
+      "ymin" : [0.2],
+      "ymax" : [0.9],
+      "score" : [0.8],
+      "conf" : [0.9]
+    },
+    "class":{
+      "label": [1],
+      "text": ["label"]
+    },
+    "parts" : {
+      "x" : [0.2, 0.5],
+      "y" : [0.3, 0.6],
+      "v" : [2, 1],
+      "score" : [1.0, 1.0]
+    }
+  }
+}
+```
+
+
 # tfrecords
 Convenience functions to create tfrecords that can be used with classification, detection and keypoint localization systems. The [create_tfrecords.py](create_tfrecords.py) file will help create the correct tfrecords to feed into those systems.
 

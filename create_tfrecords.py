@@ -98,9 +98,12 @@ def _convert_to_example(image_example, image_buffer, height, width, colorspace='
     ymin = image_bboxes.get('ymin', [])
     ymax = image_bboxes.get('ymax', [])
     bbox_scores = image_bboxes.get('score', [])
-    bbox_labels = image_bboxes.get('label', [])
-    bbox_text = map(_validate_text, image_bboxes.get('text', []))
     bbox_label_confs = image_bboxes.get('conf', [])
+
+    # Labels
+    image_classes = image_objects.get('class', {})
+    bbox_labels = image_classes.get('label', [])
+    bbox_text = map(_validate_text, image_classes.get('text', []))
 
     # Parts
     image_parts = image_objects.get('parts', {})
@@ -135,8 +138,8 @@ def _convert_to_example(image_example, image_buffer, height, width, colorspace='
         'image/object/bbox/xmax': _float_feature(xmax),
         'image/object/bbox/ymin': _float_feature(ymin),
         'image/object/bbox/ymax': _float_feature(ymax),
-        'image/object/bbox/label': _int64_feature(bbox_labels),
-        'image/object/bbox/text': _bytes_feature(bbox_text),
+        'image/object/class/label': _int64_feature(bbox_labels),
+        'image/object/class/text': _bytes_feature(bbox_text),
         'image/object/bbox/conf': _float_feature(bbox_label_confs),
         'image/object/bbox/score' : _float_feature(bbox_scores),
         'image/object/parts/x' : _float_feature(parts_x),
