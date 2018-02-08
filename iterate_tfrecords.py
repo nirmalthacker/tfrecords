@@ -32,8 +32,8 @@ def decode_serialized_example(serialized_example, features_to_fetch, decode_imag
             'image/object/bbox/xmax': tf.VarLenFeature(dtype=tf.float32),
             'image/object/bbox/ymin': tf.VarLenFeature(dtype=tf.float32),
             'image/object/bbox/ymax': tf.VarLenFeature(dtype=tf.float32),
-            'image/object/bbox/label': tf.VarLenFeature(dtype=tf.int64),
-            'image/object/bbox/text': tf.VarLenFeature(dtype=tf.string),
+            'image/object/class/label': tf.VarLenFeature(dtype=tf.int64),
+            'image/object/class/text': tf.VarLenFeature(dtype=tf.string),
             'image/object/bbox/conf': tf.VarLenFeature(dtype=tf.float32),
             'image/object/bbox/score' : tf.VarLenFeature(dtype=tf.float32),
             'image/object/parts/x' : tf.VarLenFeature(dtype=tf.float32),
@@ -89,9 +89,9 @@ def decode_serialized_example(serialized_example, features_to_fetch, decode_imag
             parsed_features[feature_name] = features[feature_key].values
         elif feature_key == 'image/object/bbox/ymax':
             parsed_features[feature_name] = features[feature_key].values
-        elif feature_key == 'image/object/bbox/label':
+        elif feature_key == 'image/object/class/label':
             parsed_features[feature_name] = features[feature_key].values
-        elif feature_key == 'image/object/bbox/text':
+        elif feature_key == 'image/object/class/text':
             parsed_features[feature_name] = features[feature_key].values
         elif feature_key == 'image/object/bbox/conf':
             parsed_features[feature_name] = features[feature_key].values
